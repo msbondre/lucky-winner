@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky User Picker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍀 Lucky User Picker</h1>
+            <p>Add users and pick a lucky winner randomly!</p>
+        </div>
+
+        <div class="content">
+            <!-- Lucky Winner Section -->
+            <div class="lucky-section">
+                <h3>🎯 Pick Lucky User</h3>
+                <p>Click the button below to randomly select a lucky username!</p>
+                <button class="btn btn-lucky" onclick="pickLuckyUser()">🎲 PICK LUCKY USER! 🎲</button>
+                <div id="luckyResult" class="lucky-result">
+                    <!-- Lucky winner will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Current Users Section -->
+            <div class="section">
+                <h3>📋 Your Users</h3>
+                
+                <!-- Clear Users Button (only visible when users exist) -->
+                <div id="clearUsersSection" style="display: none;">
+                    <button class="btn btn-danger" onclick="clearUsers()">🗑️ Clear All Users</button>
+                </div>
+                
+                <div id="usernameDisplay">
+                    <div class="empty-state" id="emptyState">
+                        <h3>🚀 Ready to get started?</h3>
+                        <p>Your users array is empty. Add users manually or load default users!</p>
+                        <div class="empty-state-buttons">
+                            <button class="btn btn-warning" onclick="loadDefaultUsers()">👥 Load Default Users</button>
+                        </div>
+                    </div>
+                    <div class="username-list" id="usernameList" style="display: none;">
+                        <!-- Users will be displayed here -->
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">Total Users</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="luckyCount">0</div>
+                        <div class="stat-label">Lucky Picks Made</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add New User Section -->
+            <div class="section">
+                <h3>➕ Add New User</h3>
+                
+                <!-- Excel File Upload -->
+                <div class="upload-section">
+                    <h4>📁 Upload Excel File</h4>
+                    <p class="upload-description">Upload an Excel file (.xlsx) with columns: name, email, mobile, lottery</p>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="excelFile" accept=".xlsx,.xls" style="display: none;">
+                        <button class="btn btn-upload" onclick="document.getElementById('excelFile').click()">
+                            📊 Choose Excel File
+                        </button>
+                        <span id="fileName" class="file-name"></span>
+                    </div>
+                    <button class="btn btn-success" onclick="uploadExcelFile()" id="uploadBtn" style="display: none;">
+                        ⬆️ Upload & Add Users
+                    </button>
+                    <div id="uploadResult" class="result" style="display: none;"></div>
+                </div>
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Manual Entry Form -->
+                <div class="manual-entry">
+                    <h4>✏️ Add Manually</h4>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="newName">Full Name:</label>
+                            <input type="text" id="newName" placeholder="Enter full name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="newEmail">Email:</label>
+                            <input type="email" id="newEmail" placeholder="Enter email address" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="newMobile">Mobile Number:</label>
+                            <input type="tel" id="newMobile" placeholder="Enter mobile number" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="newLottery">Lottery:</label>
+                            <input type="number" id="newLottery" placeholder="Enter lottery number" required>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="addUser()">➕ Add User</button>
+                    <button class="btn btn-secondary" onclick="clearNewUser()">Clear</button>
+                    <div id="addResult" class="result" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load external JavaScript files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 

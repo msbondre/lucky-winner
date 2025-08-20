@@ -1,0 +1,580 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.content {
+    padding: 30px;
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #f8f9fa;
+    border-left: 5px solid #667eea;
+}
+
+.section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+#clearUsersSection {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.section h4 {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+    background: #28a745;
+}
+
+.btn-success:hover {
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
+
+.btn-upload {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+}
+
+.btn-upload:hover {
+    box-shadow: 0 5px 15px rgba(23, 162, 184, 0.4);
+}
+
+.btn-lucky {
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    color: white;
+    font-size: 18px;
+    padding: 20px 40px;
+    border-radius: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+}
+
+.btn-lucky:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+}
+
+.btn-lucky:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.result {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.result.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.result.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.result.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.lucky-result {
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    display: none;
+}
+
+.username-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.username-item {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #e1e5e9;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.username-item:hover {
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.username-item.lucky-winner {
+    border-color: #ff6b6b;
+    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    color: white;
+    transform: scale(1.05);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1.05); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1.05); }
+}
+
+.username-item .delete-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.username-item:hover .delete-btn {
+    display: flex;
+}
+
+.username-item .delete-btn:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+.username-item .delete-btn:active {
+    transform: scale(0.95);
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.empty-state h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.empty-state p {
+    margin-bottom: 20px;
+}
+
+.empty-state-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.lucky-section {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+/* Upload Section Styles */
+.upload-section {
+    background: #e3f2fd;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 2px dashed #2196f3;
+}
+
+.upload-description {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.file-name {
+    color: #333;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider span {
+    background: #f8f9fa;
+    padding: 0 20px;
+    color: #666;
+    font-weight: 500;
+    position: relative;
+}
+
+.manual-entry {
+    background: #f0f8ff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px dashed #4caf50;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .username-list {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .btn-lucky {
+        font-size: 16px;
+        padding: 15px 30px;
+    }
+
+    .file-upload-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .empty-state-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .lucky-section {
+        padding: 20px;
+    }
+    
+    .upload-section, .manual-entry {
+        padding: 15px;
+    }
+    
+    .divider {
+        margin: 20px 0;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    
+    .btn-lucky {
+        width: auto;
+        margin: 0 auto 20px auto;
+        display: block;
+    }
+    
+    #clearUsersSection {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    #clearUsersSection .btn {
+        width: auto;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 5px;
+        border-radius: 10px;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .header p {
+        font-size: 1em;
+    }
+    
+    .section h3 {
+        font-size: 1.2em;
+    }
+    
+    .username-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .username-item {
+        padding: 15px;
+    }
+    
+    .user-name {
+        font-size: 16px;
+    }
+    
+    .lucky-result {
+        padding: 20px;
+        font-size: 20px;
+    }
+    
+    .lucky-result span {
+        font-size: 24px !important;
+    }
+    
+    .stats {
+        gap: 10px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+    }
+    
+    .stat-number {
+        font-size: 1.5em;
+    }
+    
+    .empty-state {
+        padding: 30px 20px;
+    }
+    
+    .empty-state h3 {
+        font-size: 1.3em;
+    }
+    
+    .empty-state p {
+        font-size: 0.9em;
+    }
+} 
