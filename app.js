@@ -273,6 +273,10 @@ function pickLuckyUser() {
         return;
     }
     
+    // Show loader overlay
+    const loaderOverlay = document.getElementById('loaderOverlay');
+    loaderOverlay.style.display = 'flex';
+    
     // Remove previous lucky winner highlighting
     document.querySelectorAll('.username-item').forEach(item => {
         item.classList.remove('lucky-winner');
@@ -282,37 +286,43 @@ function pickLuckyUser() {
     const randomIndex = Math.floor(Math.random() * users.length);
     const luckyUser = users[randomIndex];
     
-    // Highlight the lucky winner
-    const userItems = document.querySelectorAll('.username-item');
-    if (userItems[randomIndex]) {
-        userItems[randomIndex].classList.add('lucky-winner');
-    }
-    
-    // Show lucky result
-    const luckyResult = document.getElementById('luckyResult');
-    luckyResult.innerHTML = `
-        🎉 CONGRATULATIONS! 🎉<br>
-        <span style="font-size: 28px; margin: 10px 0; display: block;">${luckyUser.name}</span>
-        is the lucky winner! 🍀<br>
-        <span style="font-size: 16px; margin-top: 10px; display: block;">Lottery #${luckyUser.lottery}</span>
-    `;
-    luckyResult.style.display = 'block';
-    
-    // Update lucky picks count
-    luckyPicksCount++;
-    updateStats();
-    
-    // Save to localStorage
-    saveUsersToStorage();
-    
-    // Auto-hide result after 8 seconds
+    // Wait for 5 seconds to show the loader
     setTimeout(() => {
-        luckyResult.style.display = 'none';
-        // Remove highlighting after result is hidden
-        document.querySelectorAll('.username-item').forEach(item => {
-            item.classList.remove('lucky-winner');
-        });
-    }, 8000);
+        // Hide loader
+        loaderOverlay.style.display = 'none';
+        
+        // Highlight the lucky winner
+        const userItems = document.querySelectorAll('.username-item');
+        if (userItems[randomIndex]) {
+            userItems[randomIndex].classList.add('lucky-winner');
+        }
+        
+        // Show lucky result
+        const luckyResult = document.getElementById('luckyResult');
+        luckyResult.innerHTML = `
+            🎉 CONGRATULATIONS! 🎉<br>
+            <span style="font-size: 28px; margin: 10px 0; display: block;">${luckyUser.name}</span>
+            is the lucky winner! 🍀<br>
+            <span style="font-size: 16px; margin-top: 10px; display: block;">Lottery #${luckyUser.lottery}</span>
+        `;
+        luckyResult.style.display = 'block';
+        
+        // Update lucky picks count
+        luckyPicksCount++;
+        updateStats();
+        
+        // Save to localStorage
+        saveUsersToStorage();
+        
+        // Auto-hide result after 8 seconds
+        setTimeout(() => {
+            luckyResult.style.display = 'none';
+            // Remove highlighting after result is hidden
+            document.querySelectorAll('.username-item').forEach(item => {
+                item.classList.remove('lucky-winner');
+            });
+        }, 8000);
+    }, 5000); // 5 second delay
 }
 
 // Display users in the grid - showing only usernames
