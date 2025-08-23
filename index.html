@@ -73,7 +73,7 @@
                 <!-- Excel File Upload -->
                 <div class="upload-section">
                     <h4>📁 Upload Excel File</h4>
-                    <p class="upload-description">Upload an Excel file (.xlsx) with columns: name, email, mobile, lottery</p>
+                    <p class="upload-description">Upload an Excel file (.xlsx) with columns: name, lottery</p>
                     <div class="file-upload-wrapper">
                         <input type="file" id="excelFile" accept=".xlsx,.xls" style="display: none;">
                         <button class="btn btn-upload" onclick="document.getElementById('excelFile').click()">
@@ -100,18 +100,8 @@
                             <input type="text" id="newName" placeholder="Enter full name" required>
                         </div>
                         <div class="input-group">
-                            <label for="newEmail">Email:</label>
-                            <input type="email" id="newEmail" placeholder="Enter email address" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="newMobile">Mobile Number:</label>
-                            <input type="tel" id="newMobile" placeholder="Enter mobile number" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="newLottery">Lottery:</label>
-                            <input type="number" id="newLottery" placeholder="Enter lottery number" required>
+                            <label for="newLottery">Lottery Number:</label>
+                            <input type="text" id="newLottery" placeholder="Enter lottery number (min 7 digits)" required>
                         </div>
                     </div>
                     <button class="btn btn-success" onclick="addUser()">➕ Add User</button>

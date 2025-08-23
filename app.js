@@ -32,8 +32,6 @@ function saveUsersToStorage() {
 // Setup event listeners for Enter key and file upload
 function setupEventListeners() {
     document.getElementById('newName').addEventListener('keypress', handleEnter);
-    document.getElementById('newEmail').addEventListener('keypress', handleEnter);
-    document.getElementById('newMobile').addEventListener('keypress', handleEnter);
     document.getElementById('newLottery').addEventListener('keypress', handleEnter);
     
     // File upload event listener
@@ -52,39 +50,27 @@ function loadDefaultUsers() {
     const defaultUsers = [
         {
             name: "Mukund Bondre",
-            email: "mukund.bondre@sazinga.com",
-            mobile: "9665488242",
-            lottery: "0001"
+            lottery: "1234567"
         },
         {
             name: "Purvak Tayade",
-            email: "purvak.tayade@sazinga.com",
-            mobile: "9876543210",
-            lottery: "0002"
+            lottery: "2345678"
         },
         {
             name: "Shubham Kokate",
-            email: "shubham.kokate@sazinga.com",
-            mobile: "8765432109",
-            lottery: "0003"
+            lottery: "3456789"
         },
         {
             name: "Jivan Mohite",
-            email: "jivan.mohite@sazinga.com",
-            mobile: "7654321098",
-            lottery: "0004"
+            lottery: "4567890"
         },
         {
             name: "Ajay Khalate",
-            email: "ajay.khalate@sazinga.com",
-            mobile: "6543210987",
-            lottery: "0005"
+            lottery: "5678901"
         },
         {
             name: "Prathamesh Mulik",
-            email: "prathamesh.mulik@sazinga.com",
-            mobile: "5432109876",
-            lottery: "0006"
+            lottery: "6789012"
         }
     ];
     
@@ -189,25 +175,24 @@ function processExcelData(data) {
     data.forEach((row, index) => {
         // Check if required fields exist (case-insensitive)
         const name = getFieldValue(row, ['name', 'Name', 'fullname', 'FullName', 'full_name']);
-        const email = getFieldValue(row, ['email', 'Email', 'EMAIL']);
-        const mobile = getFieldValue(row, ['mobile', 'Mobile', 'phone', 'Phone', 'mobileNumber', 'mobile_number']);
         const lottery = getFieldValue(row, ['lottery', 'lottery_number', 'lottery', 'Lottery', 'number', 'Number']);
         
-        if (!name || !email || !mobile || !lottery) {
-            errors.push(`Row ${index + 2}: Missing required fields (name, email, mobile, lottery)`);
+        if (!name || !lottery) {
+            errors.push(`Row ${index + 2}: Missing required fields (name, lottery)`);
+            skippedCount++;
+            return;
+        }
+        
+        // Validate lottery number length (must be more than 6 digits)
+        const lotteryStr = String(lottery).trim();
+        if (lotteryStr.length <= 6) {
+            errors.push(`Row ${index + 2}: Lottery number must be more than 6 digits (got ${lotteryStr.length} digits)`);
             skippedCount++;
             return;
         }
         
         // Check for duplicates
-        const emailExists = users.some(user => user.email.toLowerCase() === email.toLowerCase());
-        const lotteryExists = users.some(user => user.lottery === String(lottery));
-        
-        if (emailExists) {
-            errors.push(`Row ${index + 2}: Email '${email}' already exists`);
-            skippedCount++;
-            return;
-        }
+        const lotteryExists = users.some(user => user.lottery === lotteryStr);
         
         if (lotteryExists) {
             errors.push(`Row ${index + 2}: Lottery number '${lottery}' already exists`);
@@ -218,9 +203,7 @@ function processExcelData(data) {
         // Add user to array
         const newUser = {
             name: String(name).trim(),
-            email: String(email).trim(),
-            mobile: String(mobile).trim(),
-            lottery: String(lottery).trim()
+            lottery: lotteryStr
         };
         
         users.push(newUser);
@@ -356,12 +339,16 @@ function displayUsers() {
 // Add new user
 function addUser() {
     const newName = document.getElementById('newName').value.trim();
-    const newEmail = document.getElementById('newEmail').value.trim();
-    const newMobile = document.getElementById('newMobile').value.trim();
     const newLottery = document.getElementById('newLottery').value.trim();
     
-    if (!newName || !newEmail || !newMobile || !newLottery) {
+    if (!newName || !newLottery) {
         showResult('addResult', 'Please fill in all fields', 'error');
+        return;
+    }
+    
+    // Validate lottery number length (must be more than 6 digits)
+    if (newLottery.length <= 6) {
+        showResult('addResult', `Lottery number must be more than 6 digits (got ${newLottery.length} digits)`, 'error');
         return;
     }
     
@@ -371,16 +358,8 @@ function addUser() {
         return;
     }
     
-    // Check if email already exists
-    if (users.some(user => user.email === newEmail)) {
-        showResult('addResult', `Email ${newEmail} already exists`, 'error');
-        return;
-    }
-    
     const newUser = {
         name: newName,
-        email: newEmail,
-        mobile: newMobile,
         lottery: newLottery
     };
     
@@ -431,8 +410,6 @@ function showResult(elementId, message, type) {
 // Clear functions
 function clearNewUser() {
     document.getElementById('newName').value = '';
-    document.getElementById('newEmail').value = '';
-    document.getElementById('newMobile').value = '';
     document.getElementById('newLottery').value = '';
     document.getElementById('addResult').style.display = 'none';
 } 
